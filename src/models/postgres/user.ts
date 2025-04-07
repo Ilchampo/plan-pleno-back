@@ -13,6 +13,11 @@ class User extends Model<UserAttributes, UserCreationAttributes> implements User
   public isEmailVerified!: boolean;
   public isBusinessAccount!: boolean;
   public role!: UserRole;
+  public passwordResetToken!: string | null;
+  public passwordResetExpires!: Date | null;
+  public lastLogin!: Date | null;
+  public loginAttempts!: number;
+  public accountLockedUntil!: Date | null;
 
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
@@ -54,6 +59,26 @@ const initUserModel = (): typeof User => {
       role: {
         type: DataTypes.ENUM('user', 'business', 'admin', 'superadmin'),
         defaultValue: 'user',
+      },
+      passwordResetToken: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      passwordResetExpires: {
+        type: DataTypes.DATE,
+        allowNull: true,
+      },
+      lastLogin: {
+        type: DataTypes.DATE,
+        allowNull: true,
+      },
+      loginAttempts: {
+        type: DataTypes.INTEGER,
+        defaultValue: 0,
+      },
+      accountLockedUntil: {
+        type: DataTypes.DATE,
+        allowNull: true,
       },
       createdAt: {
         type: DataTypes.DATE,

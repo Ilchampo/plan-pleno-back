@@ -9,6 +9,11 @@ export interface UserAttributes {
   isEmailVerified: boolean;
   isBusinessAccount: boolean;
   role: UserRole;
+  passwordResetToken: string | null;
+  passwordResetExpires: Date | null;
+  lastLogin: Date | null;
+  loginAttempts: number;
+  accountLockedUntil: Date | null;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -16,7 +21,17 @@ export interface UserAttributes {
 export interface UserCreationAttributes
   extends Optional<
     UserAttributes,
-    'id' | 'createdAt' | 'updatedAt' | 'googleId' | 'isEmailVerified' | 'isBusinessAccount'
+    | 'id'
+    | 'createdAt'
+    | 'updatedAt'
+    | 'googleId'
+    | 'isEmailVerified'
+    | 'isBusinessAccount'
+    | 'passwordResetToken'
+    | 'passwordResetExpires'
+    | 'lastLogin'
+    | 'loginAttempts'
+    | 'accountLockedUntil'
   > {}
 
 export interface UserPreferenceAttributes {
